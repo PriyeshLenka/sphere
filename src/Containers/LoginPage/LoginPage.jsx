@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 /*
   This example requires some changes to your config:
   
@@ -12,7 +13,74 @@
   }
   ```
 */
+
+// TO:DO debouncing implementation
 export default function LoginPage() {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [errors, setErrors] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+
+    if (name === 'email') {
+      validateEmail();
+    }
+  };
+
+  const validateEmail = () => {
+    // Simple email format validation using a regular expression
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!formData.email || !emailRegex.test(formData.email)) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        email: "Please enter a valid email address",
+      }));
+    } else {
+      setErrors((prevErrors) => ({ ...prevErrors, email: "" }));
+    }
+  };
+
+  const validatePassword = () => {
+    // Basic password strength validation (minimum 8 characters)
+    if (!formData.password || formData.password.length < 8) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        password: "Password must be at least 8 characters long",
+      }));
+    } else {
+      setErrors((prevErrors) => ({ ...prevErrors, password: "" }));
+    }
+  };
+
+  const handleTogglePassword = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    validateEmail();
+    validatePassword();
+
+    if (!errors.email && !errors.password) {
+      setLoading(true);
+      // Simulate API call (replace with your actual API request)
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      setLoading(false);
+      console.log("Form submitted:", formData);
+    }
+  };
+
   return (
     <>
       {/*
@@ -36,9 +104,12 @@ export default function LoginPage() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST">
+          <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
-              <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900 text-left">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium leading-6 text-gray-900 text-left"
+              >
                 Email address
               </label>
               <div className="mt-2">
@@ -48,33 +119,73 @@ export default function LoginPage() {
                   type="email"
                   autoComplete="email"
                   placeholder="name@company.com"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                 
                   required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 p-2.5 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 p-2.5 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 ${
+                    errors.email && "border-red-500" // Highlight border if there is an error
+                  }`}
                 />
+                {errors.email && (
+                  <p className="mt-1 text-xs text-red-500 text-left">
+                    {errors.email}
+                  </p>
+                )}
               </div>
             </div>
 
             <div>
               <div className="flex items-center justify-between">
-                <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
                   Password
                 </label>
-                <div className="text-sm">
-                  <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
-                    Forgot password?
-                  </a>
-                </div>
               </div>
-              <div className="mt-2">
+              <div className="mt-2 relative">
                 <input
                   id="password"
                   name="password"
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   placeholder="••••••••"
                   autoComplete="current-password"
                   required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 p-2.5 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  value={formData.password}
+                  onChange={handleInputChange}
+                  onBlur={validatePassword}
+                  className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 p-2.5 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 ${
+                    errors.password && "border-red-500"
+                  }`}
                 />
+                <div className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
+                  <button
+                    type="button"
+                    onClick={handleTogglePassword}
+                    className="text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition duration-150 ease-in-out"
+                  >
+                    {showPassword ? "Hide" : "Show"}
+                  </button>
+                </div>
+              </div>
+
+              <div className="flex justify-between">
+                <div className="w-50">
+                  {errors.password && (
+                    <p className="mt-1 text-xs text-red-500 text-left">
+                      {errors.password}
+                    </p>
+                  )}
+                </div>
+                <div className="w-50 text-sm">
+                  <a
+                    href="#"
+                    className="font-semibold text-indigo-600 hover:text-indigo-500"
+                  >
+                    Forgot password?
+                  </a>
+                </div>
               </div>
             </div>
 
@@ -89,13 +200,16 @@ export default function LoginPage() {
           </form>
 
           <p className="mt-10 text-center text-sm text-gray-500">
-            Not a member?{' '}
-            <a href="#" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+            Not a member?{" "}
+            <a
+              href="#"
+              className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+            >
               Start a 14 day free trial
             </a>
           </p>
         </div>
       </div>
     </>
-  )
+  );
 }
