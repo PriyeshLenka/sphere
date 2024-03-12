@@ -16,7 +16,7 @@ const ContentRenderer = () => {
   };
 
   return (
-    <div className="content-renderer-root" id="content-render">
+    <div className="content-renderer-root mt-12" id="content-render">
       <ErrorBoundary FallbackComponent={fallbackRender}>
         <Suspense fallback={<center>Loading...</center>}>
           <Outlet />
