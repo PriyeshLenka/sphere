@@ -48,10 +48,10 @@ const Header = () => {
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <Link
-            to={`/${BASE_URI}/auth/user/authentication/login`}
+            to={`/${BASE_URI}/auth/user/authentication`}
             className="text-sm font-semibold leading-6 text-gray-900"
           >
-            Log in <span aria-hidden="true">&rarr;</span>
+            Login/SignUp <span aria-hidden="true">&rarr;</span>
           </Link>
         </div>
       </nav>

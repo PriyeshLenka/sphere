@@ -1,11 +1,12 @@
 import { createBrowserRouter } from 'react-router-dom';
 import App from '../App';
 import { BASE_URI, PATH_CONSTANTS } from './Contants';
-import LoginPage from '../Containers/LoginPage/LoginPage';
+import LoginPage from '../Containers/AuthenticationModal/AuthenticationModal';
 import LandingPage from '../Containers/LandingPage/LandingPagev1';
 import ErrorPage from '../Components/Error/Error';
 import UserDashboard from '../Containers/Dashboard/UserDashboard';
-
+import QuestionModal from '../Containers/Modals/QuestionModal';
+import UserActionModal from "../Containers/Modals/UserActionModal"
 export const router = createBrowserRouter([
   {
     path: `/`,
@@ -25,8 +26,8 @@ export const router = createBrowserRouter([
     ]
   },
   {
-    path: `/${BASE_URI}/auth/user/authentication/login`,
-    element: <LoginPage />,
+    path: `/${BASE_URI}/auth/user/authentication`,
+    element: <UserActionModal modalType = "question"/>,
     errorElement: <ErrorPage />
   }
 ]);
