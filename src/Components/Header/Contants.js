@@ -10,5 +10,6 @@ export const navigation = [
     href: `/${BASE_URI}/${PATH_CONSTANTS.DASHBOARD}/${PATH_CONSTANTS.USER}`
   },
   { name: 'Help', href: '/' },
-  { name: 'About', href: '/' }
+  { name: 'About', href: '/' },
+  { name: 'Show Statistics', href: '/', isMobileMenu: true }
 ];

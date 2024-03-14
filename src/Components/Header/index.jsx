@@ -36,22 +36,24 @@ const Header = () => {
           </button>
         </div>
         <div className="hidden lg:flex lg:gap-x-12">
-          {navigation.map((item) => (
-            <Link
-              key={item.name}
-              to={item.href}
-              className="text-sm font-semibold leading-6 text-gray-900"
-            >
-              {item.name}
-            </Link>
-          ))}
+          {navigation
+            .filter((it) => !it.isMobileMenu)
+            .map((item) => (
+              <Link
+                key={item.name}
+                to={item.href}
+                className="text-sm font-semibold leading-6 text-gray-900"
+              >
+                {item.name}
+              </Link>
+            ))}
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <Link
             to={`/${BASE_URI}/auth/user/authentication`}
             className="text-sm font-semibold leading-6 text-gray-900"
           >
-            Login/SignUp <span aria-hidden="true">&rarr;</span>
+            Login <span aria-hidden="true">&rarr;</span>
           </Link>
         </div>
       </nav>
