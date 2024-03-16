@@ -5,8 +5,7 @@ import LoginPage from '../Containers/AuthenticationModal/AuthenticationModal';
 import LandingPage from '../Containers/LandingPage/LandingPagev1';
 import ErrorPage from '../Components/Error/Error';
 import UserDashboard from '../Containers/Dashboard/UserDashboard';
-import QuestionModal from '../Containers/Modals/QuestionModal';
-import UserActionModal from "../Containers/Modals/UserActionModal"
+import Feeds from '../Containers/Feeds';
 export const router = createBrowserRouter([
   {
     path: `/`,
@@ -15,7 +14,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: `/`,
-        element: <LandingPage />,
+        element: <Feeds />,
         errorElement: <ErrorPage />
       },
       {
@@ -27,7 +26,7 @@ export const router = createBrowserRouter([
   },
   {
     path: `/${BASE_URI}/auth/user/authentication`,
-    element: <UserActionModal modalType = "question"/>,
+    element: <LoginPage />,
     errorElement: <ErrorPage />
   }
 ]);
