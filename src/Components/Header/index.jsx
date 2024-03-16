@@ -53,7 +53,7 @@ const Header = () => {
             to={`/${BASE_URI}/auth/user/authentication`}
             className="text-sm font-semibold leading-6 text-gray-900"
           >
-            Login <span aria-hidden="true">&rarr;</span>
+            Sign in <span aria-hidden="true">&rarr;</span>
           </Link>
         </div>
       </nav>
