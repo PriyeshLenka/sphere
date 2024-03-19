@@ -22,8 +22,8 @@
 
 .question-box-card {
   display: flex;
-  width: 500px;
-  height: max-content;
+  width: 100%;
+  height: auto;
   padding: 0.75rem;
   gap: 0.5rem;
   background: rgba(255, 255, 255, 0.2);
@@ -55,13 +55,6 @@
   cursor: pointer;
 }
 
-.question-box-card {
-  display: flex;
-  width: 100%;
-  height: -moz-max-content;
-  height: 40%;
-}
-
 .source-image {
   height: auto;
   display: flex;
@@ -77,16 +70,16 @@
   gap: 0.25rem;
   padding-right: 1rem;
   /* height: auto; */
-  overflow:auto;
+  overflow: auto;
 }
 
 .question-tag {
-    padding-left: 0.5rem;
-    width: 60px;
-    display: flex;
-    flex-direction: column;
-    column-gap: 0.25rem;
-  }
+  padding-left: 0.5rem;
+  width: 60px;
+  display: flex;
+  flex-direction: column;
+  column-gap: 0.25rem;
+}
 
 .question-details-footer {
   display: flex;
@@ -95,35 +88,36 @@
   justify-content: flex-end;
 }
 .question-text-area::-webkit-scrollbar {
-    width: 10px; /* Set the width of the scrollbar */
+  width: 10px; /* Set the width of the scrollbar */
 }
 
 .question-text-area::-webkit-scrollbar-thumb {
-    background-color: #888; /* Set the color of the thumb */
-    border-radius: 5px; /* Set the border radius of the thumb */
+  background-color: #888; /* Set the color of the thumb */
+  border-radius: 5px; /* Set the border radius of the thumb */
 }
 
 .question-text-area::-webkit-scrollbar-thumb:hover {
-    background-color: #555; /* Set the color of the thumb on hover */
+  background-color: #555; /* Set the color of the thumb on hover */
 }
 
 .question-text-area::-webkit-scrollbar-track {
-    background-color: #f2f2f2; /* Set the color of the track */
-    border-radius: 5px; /* Set the border radius of the track */
+  background-color: #f2f2f2; /* Set the color of the track */
+  border-radius: 5px; /* Set the border radius of the track */
 }
 
 .question-text-area::-webkit-scrollbar-track:hover {
-    background-color: #e5e5e5; /* Set the color of the track on hover */
+  background-color: #e5e5e5; /* Set the color of the track on hover */
 }
 
-.img-in-question{
+.img-in-question {
   width: 20rem;
   height: auto;
 }
 
-.comment-sections{
-  height: 100%;
+.comment-sections {
+  height: 25rem;
   padding: 0.5rem;
+  overflow: auto;
 }
 
 .comment-box-container-in {
@@ -157,13 +151,6 @@
   cursor: pointer;
 }
 
-.accordion-button{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 100%;
-}
-
 .accordion-question-area {
   width: 100%;
   background-color: transparent; /* Set initial background color */
@@ -171,7 +158,7 @@
   /* Add any other styles as needed */
 }
 
-.parent-queries-container{
+.parent-queries-container {
   display: grid;
   grid-template-columns: 40% auto;
 }
@@ -228,6 +215,6 @@
   column-gap: 0.25rem;
 }
 
-.accordion-open{
+.accordion-open {
   transition: 2s ease-in-out;
 }
